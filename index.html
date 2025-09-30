@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дневник PWA</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-storage.js"></script>
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+    <div id="app">
+        <h1>Дневник</h1>
+        <button id="admin-btn">Войти как админ</button>
+        <div id="admin-panel" style="display: none;">
+            <input type="password" id="pin-input" placeholder="Введите PIN">
+            <button id="login-btn">Войти</button>
+            <button id="logout-btn" style="display: none;">Выйти</button>
+            <div id="admin-controls">
+                <h2>Добавить предмет</h2>
+                <input type="text" id="subject-name" placeholder="Название предмета">
+                <input type="file" id="subject-preview" accept="image/*">
+                <button id="add-subject-btn">Добавить</button>
+            </div>
+        </div>
+        <div id="subjects-list"></div>
+        <div id="task-detail" style="display: none;">
+            <h2 id="task-title"></h2>
+            <p id="task-description"></p>
+            <div id="task-images"></div>
+            <p id="last-updated"></p>
+            <div id="admin-task-edit" style="display: none;">
+                <textarea id="task-text" placeholder="Задание"></textarea>
+                <input type="file" id="task-photo1" accept="image/*">
+                <input type="file" id="task-photo2" accept="image/*">
+                <input type="file" id="task-photo3" accept="image/*">
+                <button id="save-task-btn">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('Service Worker registered'))
+                .catch(err => console.error('Service Worker registration failed', err));
+        }
+    </script>
+</body>
+</html>
